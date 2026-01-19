@@ -39,7 +39,6 @@ export default function SettingsPage() {
                                 <CardContent className="space-y-6">
                                     <div className="flex items-center gap-4">
                                         <Avatar className="h-20 w-20">
-                                            <AvatarImage src="/avatar-placeholder.png" />
                                             <AvatarFallback className="text-lg">AD</AvatarFallback>
                                         </Avatar>
                                         <Button variant="outline">Change Avatar</Button>

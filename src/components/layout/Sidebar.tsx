@@ -88,7 +88,6 @@ export function Sidebar() {
             <div className="p-4 border-t border-sidebar-border">
                 <div className={cn("flex items-center gap-3", isCollapsed && "justify-center")}>
                     <Avatar className="h-9 w-9 border border-border">
-                        <AvatarImage src="/avatar-placeholder.png" />
                         <AvatarFallback>AD</AvatarFallback>
                     </Avatar>
                     {!isCollapsed && (
