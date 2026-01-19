@@ -15,7 +15,7 @@ export default function LandingPage() {
             <div className="h-9 w-9 bg-primary rounded-lg flex items-center justify-center">
               <Box className="h-5 w-5 text-white" />
             </div>
-            <span className="text-xl font-bold font-heading">Aldarr</span>
+            <span className="text-xl font-bold font-heading">Aldar</span>
           </div>
           <Link href="/dashboard">
             <Button className="font-medium px-5 bg-primary text-white hover:bg-primary/90 rounded-lg h-9">
@@ -37,7 +37,7 @@ export default function LandingPage() {
 
             {/* Headline */}
             <h1 className="text-4xl md:text-5xl font-bold font-heading tracking-tight mb-4">
-              Aldarr Lead Management
+              Aldar Lead Management
             </h1>
 
             <p className="text-lg text-muted-foreground mb-10 max-w-md mx-auto leading-relaxed">
@@ -80,7 +80,7 @@ export default function LandingPage() {
       {/* Simple Footer */}
       <footer className="border-t border-border/40 py-4">
         <div className="container mx-auto px-6 text-center text-sm text-muted-foreground">
-          © 2026 Aldarr. Internal use only.
+          © 2026 Aldar. Internal use only.
         </div>
       </footer>
     </div>

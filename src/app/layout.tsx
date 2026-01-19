@@ -13,7 +13,7 @@ const outfit = Outfit({
 });
 
 export const metadata: Metadata = {
-  title: "Aldarr - Lead Generation Control",
+  title: "Aldar - Lead Generation Control",
   description: "B2B Lead Generation SaaS for Fashion Brands",
 };
 

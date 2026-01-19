@@ -50,7 +50,7 @@ export default function SettingsPage() {
                                         </div>
                                         <div className="space-y-2">
                                             <Label htmlFor="email">Email</Label>
-                                            <Input id="email" defaultValue="alex@aldarr.com" />
+                                            <Input id="email" defaultValue="alex@aldar.com" />
                                         </div>
                                     </div>
                                 </CardContent>
