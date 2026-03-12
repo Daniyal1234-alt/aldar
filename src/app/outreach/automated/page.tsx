@@ -506,6 +506,8 @@ export default function AutomatedOutreachPage() {
                                                 <TableRow>
                                                     <TableHead>Contact</TableHead>
                                                     <TableHead>Company</TableHead>
+                                                    <TableHead>Email</TableHead>
+                                                    <TableHead>Phone</TableHead>
                                                     <TableHead>Source</TableHead>
                                                     <TableHead>Status</TableHead>
                                                     <TableHead>Intent</TableHead>
@@ -526,18 +528,23 @@ export default function AutomatedOutreachPage() {
                                                             onClick={() => openLeadDialog(lead)}
                                                         >
                                                             <TableCell>
-                                                                <div>
-                                                                    <p className="font-medium text-sm">
-                                                                        {lead.full_name || 'Unknown'}
-                                                                    </p>
-                                                                    <p className="text-xs text-muted-foreground truncate max-w-[180px]">
-                                                                        {lead.email || '—'}
-                                                                    </p>
-                                                                </div>
+                                                                <p className="font-medium text-sm">
+                                                                    {lead.company_name || lead.full_name || '—'}
+                                                                </p>
                                                             </TableCell>
                                                             <TableCell>
                                                                 <p className="text-sm truncate max-w-[150px]">
                                                                     {lead.company_name || '—'}
+                                                                </p>
+                                                            </TableCell>
+                                                            <TableCell>
+                                                                <p className="text-xs text-muted-foreground truncate max-w-[180px]">
+                                                                    {lead.email || '—'}
+                                                                </p>
+                                                            </TableCell>
+                                                            <TableCell>
+                                                                <p className="text-xs text-muted-foreground truncate max-w-[130px]">
+                                                                    {lead.phone || '—'}
                                                                 </p>
                                                             </TableCell>
                                                             <TableCell>

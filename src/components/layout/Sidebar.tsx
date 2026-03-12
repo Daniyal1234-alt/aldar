@@ -9,7 +9,6 @@ import {
     Search,
     Send,
     Users,
-    Settings,
     ChevronLeft,
     ChevronRight,
     LogOut,
@@ -27,9 +26,6 @@ const navItems = [
     { name: "Campaigns", href: "/campaigns", icon: Send },
     { name: "Manual Outreach", href: "/outreach/manual", icon: Instagram },
     { name: "Automated Outreach", href: "/outreach/automated", icon: Mail },
-    { name: "Outreach Stats", href: "/outreach", icon: BarChart3 },
-    { name: "CRM", href: "/crm", icon: Users },
-    { name: "Settings", href: "/settings", icon: Settings },
 ];
 
 export function Sidebar() {
@@ -88,11 +84,11 @@ export function Sidebar() {
             <div className="p-4 border-t border-sidebar-border">
                 <div className={cn("flex items-center gap-3", isCollapsed && "justify-center")}>
                     <Avatar className="h-9 w-9 border border-border">
-                        <AvatarFallback>AD</AvatarFallback>
+                        <AvatarFallback>AA</AvatarFallback>
                     </Avatar>
                     {!isCollapsed && (
                         <div className="flex-1 overflow-hidden">
-                            <p className="text-sm font-medium truncate">Alex Designer</p>
+                            <p className="text-sm font-medium truncate">Amir Aldar</p>
                             <p className="text-xs text-muted-foreground truncate">Pro Plan</p>
                         </div>
                     )}

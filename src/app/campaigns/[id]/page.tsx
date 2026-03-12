@@ -193,6 +193,7 @@ export default function CampaignDetailPage() {
                                                     <TableHead>Name</TableHead>
                                                     <TableHead>Company</TableHead>
                                                     <TableHead>Email</TableHead>
+                                                    <TableHead>Phone</TableHead>
                                                     <TableHead>Source</TableHead>
                                                     <TableHead>Status</TableHead>
                                                     <TableHead className="text-right">Actions</TableHead>
@@ -205,9 +206,10 @@ export default function CampaignDetailPage() {
                                                         className="cursor-pointer hover:bg-muted/50"
                                                         onClick={() => openLeadDetail(lead)}
                                                     >
-                                                        <TableCell className="font-medium">{lead.full_name || 'Unknown'}</TableCell>
-                                                        <TableCell>{lead.company_name || '-'}</TableCell>
-                                                        <TableCell className="text-muted-foreground">{lead.email || '-'}</TableCell>
+                                                        <TableCell className="font-medium">{lead.company_name || lead.full_name || '—'}</TableCell>
+                                                        <TableCell>{lead.company_name || '—'}</TableCell>
+                                                        <TableCell className="text-muted-foreground">{lead.email || '—'}</TableCell>
+                                                        <TableCell className="text-muted-foreground">{lead.phone || '—'}</TableCell>
                                                         <TableCell>
                                                             <Badge variant="outline">{formatSourceName(lead.lead_source)}</Badge>
                                                         </TableCell>

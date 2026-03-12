@@ -7,7 +7,6 @@ import { Input } from "@/components/ui/input";
 import { Card, CardContent } from "@/components/ui/card";
 import { Slider } from "@/components/ui/slider";
 import { Badge } from "@/components/ui/badge";
-import { Textarea } from "@/components/ui/textarea";
 import { toast } from "sonner";
 import { supabase } from "@/lib/supabase";
 import {
@@ -32,9 +31,29 @@ const platforms = [
 ];
 
 const countries = [
-    "United States", "United Kingdom", "Canada", "Australia",
-    "Germany", "France", "United Arab Emirates", "Saudi Arabia",
-    "Singapore", "Japan", "India", "Brazil"
+    // Middle East
+    "United Arab Emirates", "Saudi Arabia", "Qatar", "Bahrain", "Kuwait", "Oman",
+    "Jordan", "Lebanon", "Iraq", "Egypt", "Turkey", "Israel", "Palestine",
+    // South Asia
+    "India", "Pakistan", "Bangladesh", "Sri Lanka", "Nepal",
+    // Southeast Asia
+    "Singapore", "Malaysia", "Indonesia", "Thailand", "Philippines", "Vietnam",
+    // East Asia
+    "Japan", "South Korea", "China", "Hong Kong", "Taiwan",
+    // Europe
+    "United Kingdom", "Germany", "France", "Italy", "Spain", "Netherlands",
+    "Belgium", "Switzerland", "Austria", "Sweden", "Norway", "Denmark",
+    "Finland", "Ireland", "Portugal", "Poland", "Czech Republic", "Greece", "Romania",
+    // Americas
+    "United States", "Canada", "Mexico", "Brazil", "Argentina", "Colombia", "Chile",
+    // Africa
+    "South Africa", "Nigeria", "Kenya", "Morocco", "Ghana", "Ethiopia",
+    // Oceania
+    "Australia", "New Zealand",
+    // Central Asia
+    "Kazakhstan", "Uzbekistan",
+    // Caribbean
+    "Jamaica", "Trinidad and Tobago",
 ].sort();
 
 export function SearchConfig() {
@@ -44,8 +63,6 @@ export function SearchConfig() {
 
     // Form State
     const [campaignName, setCampaignName] = useState("");
-    const [niches, setNiches] = useState("");
-    const [keywords, setKeywords] = useState("");
     const [selectedPlatforms, setSelectedPlatforms] = useState<string[]>(["instagram"]);
     const [selectedCountries, setSelectedCountries] = useState<string[]>([]);
     const [quantity, setQuantity] = useState([50]);
@@ -67,14 +84,12 @@ export function SearchConfig() {
     };
 
     const handleGenerate = async () => {
-        if (!campaignName || !niches || !keywords || selectedPlatforms.length === 0 || selectedCountries.length === 0) {
+        if (!campaignName || selectedPlatforms.length === 0 || selectedCountries.length === 0) {
             toast.error("Please fill in all required fields.");
             return;
         }
 
         setLoading(true);
-
-        const keywordsArray = keywords.split(',').map(s => s.trim()).filter(Boolean);
 
         try {
             // 1. Insert into Supabase
@@ -82,10 +97,8 @@ export function SearchConfig() {
                 .from('campaigns')
                 .insert({
                     campaign_name: campaignName,
-                    target_niche: niches,
                     sources: selectedPlatforms,
                     regions: selectedCountries,
-                    keywords: keywordsArray,
                     quantity: quantity[0],
                     status: 'active'
                 })
@@ -103,8 +116,6 @@ export function SearchConfig() {
             const payload = {
                 campaignId: campaign.id,
                 campaignName,
-                niches: niches.split(',').map(s => s.trim()).filter(Boolean),
-                keywords: keywordsArray,
                 platforms: selectedPlatforms,
                 countries: selectedCountries,
                 quantity: quantity[0]
@@ -265,28 +276,6 @@ export function SearchConfig() {
                                 </Command>
                             </PopoverContent>
                         </Popover>
-                    </div>
-                </div>
-
-                {/* Row 3: Niches & Keywords */}
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <div className="space-y-2">
-                        <label className="text-sm font-medium text-muted-foreground">Target Niches (Comma separated)</label>
-                        <Textarea
-                            placeholder="Full service marketing agencies, SEO specialists, Web design studios..."
-                            className="resize-none min-h-[80px]"
-                            value={niches}
-                            onChange={(e) => setNiches(e.target.value)}
-                        />
-                    </div>
-                    <div className="space-y-2">
-                        <label className="text-sm font-medium text-muted-foreground">Keywords (Comma separated)</label>
-                        <Textarea
-                            placeholder="CEO, Founder, Marketing Director, Owner..."
-                            className="resize-none min-h-[80px]"
-                            value={keywords}
-                            onChange={(e) => setKeywords(e.target.value)}
-                        />
                     </div>
                 </div>
 
