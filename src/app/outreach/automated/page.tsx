@@ -122,7 +122,9 @@ export default function AutomatedOutreachPage() {
                 { event: '*', schema: 'public', table: 'leads' },
                 (payload) => {
                     if (payload.eventType === 'INSERT') {
-                        setLeads((prev) => [payload.new as Lead, ...prev]);
+                        const newLead = payload.new as Lead;
+                        if (newLead.lead_source === 'instagram') return;
+                        setLeads((prev) => [newLead, ...prev]);
                     } else if (payload.eventType === 'UPDATE') {
                         setLeads((prev) =>
                             prev.map((lead) =>
@@ -149,6 +151,7 @@ export default function AutomatedOutreachPage() {
         const { data, error } = await supabase
             .from('leads')
             .select('*')
+            .neq('lead_source', 'instagram')
             .order('created_at', { ascending: false });
 
         if (error) {
