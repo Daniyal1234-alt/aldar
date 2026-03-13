@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Users, CheckCircle2, Phone, DollarSign, Loader2 } from "lucide-react";
+import { Users, CheckCircle2, Phone } from "lucide-react";
 import { supabase } from "@/lib/supabase";
 
 interface MetricData {
@@ -53,7 +53,6 @@ export function MetricsCards() {
 
     const emailRate = data.totalLeads > 0 ? ((data.verifiedEmails / data.totalLeads) * 100).toFixed(1) : "0";
     const waRate = data.totalLeads > 0 ? ((data.whatsappNumbers / data.totalLeads) * 100).toFixed(1) : "0";
-    const outreachCost = (data.totalLeads * 0.05).toFixed(2);
 
     const metrics = [
         {
@@ -77,17 +76,10 @@ export function MetricsCards() {
             detail: loading ? "Loading..." : `${waRate}% have WA`,
             color: "text-green-600",
         },
-        {
-            title: "Est. Outreach Cost",
-            value: loading ? "..." : `$${outreachCost}`,
-            icon: DollarSign,
-            detail: "$0.05 per contact",
-            color: "text-purple-600",
-        },
     ];
 
     return (
-        <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+        <div className="grid gap-4 md:grid-cols-3">
             {metrics.map((metric) => (
                 <Card key={metric.title} className="hover:shadow-lg transition-all duration-200 border-border/60">
                     <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
