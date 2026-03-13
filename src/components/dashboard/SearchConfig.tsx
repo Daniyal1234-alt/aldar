@@ -65,7 +65,7 @@ export function SearchConfig() {
     const [campaignName, setCampaignName] = useState("");
     const [selectedPlatforms, setSelectedPlatforms] = useState<string[]>(["instagram"]);
     const [selectedCountries, setSelectedCountries] = useState<string[]>([]);
-    const [quantity, setQuantity] = useState([50]);
+    const quantity = 1000;
 
     const togglePlatform = (value: string) => {
         setSelectedPlatforms((current) =>
@@ -99,7 +99,7 @@ export function SearchConfig() {
                     campaign_name: campaignName,
                     sources: selectedPlatforms,
                     regions: selectedCountries,
-                    quantity: quantity[0],
+                    quantity: quantity,
                     status: 'active'
                 })
                 .select()
@@ -118,7 +118,7 @@ export function SearchConfig() {
                 campaignName,
                 platforms: selectedPlatforms,
                 countries: selectedCountries,
-                quantity: quantity[0]
+                quantity: quantity
             };
 
             const response = await fetch("https://n8n.al-dar.com/webhook-test/3295f12d-70aa-484f-9f8c-9c3d3002861c", {
@@ -159,15 +159,8 @@ export function SearchConfig() {
                     <div className="space-y-4 pt-1">
                         <div className="flex justify-between">
                             <label className="text-sm font-medium text-muted-foreground">Quantity Limit</label>
-                            <span className="text-sm font-bold text-primary">{quantity[0]}</span>
+                            <span className="text-sm font-bold text-primary">{quantity}</span>
                         </div>
-                        <Slider
-                            defaultValue={[50]}
-                            max={500}
-                            step={10}
-                            onValueChange={setQuantity}
-                            className="py-1"
-                        />
                     </div>
                 </div>
 
