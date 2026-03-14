@@ -182,8 +182,8 @@ export default function ManualOutreachPage() {
     };
 
     const getInstagramUrl = (lead: InstagramLead): string => {
-        if (lead.url) return lead.url;
         if (lead.username) return `https://instagram.com/${lead.username.replace('@', '')}`;
+        if (lead.url) return lead.url;
         return '#';
     };
 
