@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 import { Sidebar } from "@/components/layout/Sidebar";
 import { Header } from "@/components/layout/Header";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { ArrowUp, ArrowDown, Loader2, Users, Target, Mail, CheckCircle2 } from "lucide-react";
+import { Loader2, Users, Target, CheckCircle2, ThumbsUp, ThumbsDown, Minus, HelpCircle } from "lucide-react";
 import { supabase } from "@/lib/supabase";
 import {
     BarChart,
@@ -24,9 +24,10 @@ interface DashboardMetrics {
     totalCampaigns: number;
     activeCampaigns: number;
     totalLeads: number;
-    newLeads: number;
-    contactedLeads: number;
-    repliedLeads: number;
+    interestedLeads: number;
+    notInterestedLeads: number;
+    neutralLeads: number;
+    questionLeads: number;
     leadsBySource: { name: string; value: number }[];
     leadsByDay: { day: string; leads: number }[];
 }
@@ -39,9 +40,10 @@ export default function DashboardOverviewPage() {
         totalCampaigns: 0,
         activeCampaigns: 0,
         totalLeads: 0,
-        newLeads: 0,
-        contactedLeads: 0,
-        repliedLeads: 0,
+        interestedLeads: 0,
+        notInterestedLeads: 0,
+        neutralLeads: 0,
+        questionLeads: 0,
         leadsBySource: [],
         leadsByDay: []
     });
@@ -72,9 +74,10 @@ export default function DashboardOverviewPage() {
             const totalCampaigns = campaigns?.length || 0;
             const activeCampaigns = campaigns?.filter(c => c.status === 'active').length || 0;
             const totalLeads = leads?.length || 0;
-            const newLeads = leads?.filter(l => l.outreach_status === 'new').length || 0;
-            const contactedLeads = leads?.filter(l => l.outreach_status === 'contacted').length || 0;
-            const repliedLeads = leads?.filter(l => l.outreach_status === 'replied').length || 0;
+            const interestedLeads = leads?.filter(l => l.reply_intent === 'interested').length || 0;
+            const notInterestedLeads = leads?.filter(l => l.reply_intent === 'not_interested').length || 0;
+            const neutralLeads = leads?.filter(l => l.reply_intent === 'neutral').length || 0;
+            const questionLeads = leads?.filter(l => l.reply_intent === 'question').length || 0;
 
             // Leads by source
             const sourceCount: Record<string, number> = {};
@@ -99,9 +102,10 @@ export default function DashboardOverviewPage() {
                 totalCampaigns,
                 activeCampaigns,
                 totalLeads,
-                newLeads,
-                contactedLeads,
-                repliedLeads,
+                interestedLeads,
+                notInterestedLeads,
+                neutralLeads,
+                questionLeads,
                 leadsBySource,
                 leadsByDay: last7Days
             });
@@ -117,7 +121,6 @@ export default function DashboardOverviewPage() {
         { title: "Total Campaigns", value: metrics.totalCampaigns, icon: Target, color: "text-primary" },
         { title: "Active Campaigns", value: metrics.activeCampaigns, icon: CheckCircle2, color: "text-green-600" },
         { title: "Total Leads", value: metrics.totalLeads, icon: Users, color: "text-blue-600" },
-        { title: "New Leads", value: metrics.newLeads, icon: Mail, color: "text-purple-600" },
     ];
 
     return (
@@ -157,24 +160,34 @@ export default function DashboardOverviewPage() {
                                 ))}
                             </div>
 
-                            {/* Status Breakdown */}
-                            <div className="grid gap-4 md:grid-cols-3">
+                            {/* Reply Intent Breakdown */}
+                            <div className="grid gap-4 md:grid-cols-4">
                                 <Card className="shadow-none border-border rounded-xl">
                                     <CardContent className="p-6 text-center">
-                                        <div className="text-4xl font-bold text-blue-600">{metrics.newLeads}</div>
-                                        <div className="text-sm text-muted-foreground mt-1">New Leads</div>
+                                        <ThumbsUp className="h-5 w-5 text-green-600 mx-auto mb-2" />
+                                        <div className="text-4xl font-bold text-green-600">{metrics.interestedLeads}</div>
+                                        <div className="text-sm text-muted-foreground mt-1">Interested</div>
                                     </CardContent>
                                 </Card>
                                 <Card className="shadow-none border-border rounded-xl">
                                     <CardContent className="p-6 text-center">
-                                        <div className="text-4xl font-bold text-yellow-600">{metrics.contactedLeads}</div>
-                                        <div className="text-sm text-muted-foreground mt-1">Contacted</div>
+                                        <ThumbsDown className="h-5 w-5 text-red-600 mx-auto mb-2" />
+                                        <div className="text-4xl font-bold text-red-600">{metrics.notInterestedLeads}</div>
+                                        <div className="text-sm text-muted-foreground mt-1">Not Interested</div>
                                     </CardContent>
                                 </Card>
                                 <Card className="shadow-none border-border rounded-xl">
                                     <CardContent className="p-6 text-center">
-                                        <div className="text-4xl font-bold text-green-600">{metrics.repliedLeads}</div>
-                                        <div className="text-sm text-muted-foreground mt-1">Replied</div>
+                                        <Minus className="h-5 w-5 text-yellow-600 mx-auto mb-2" />
+                                        <div className="text-4xl font-bold text-yellow-600">{metrics.neutralLeads}</div>
+                                        <div className="text-sm text-muted-foreground mt-1">Neutral</div>
+                                    </CardContent>
+                                </Card>
+                                <Card className="shadow-none border-border rounded-xl">
+                                    <CardContent className="p-6 text-center">
+                                        <HelpCircle className="h-5 w-5 text-blue-600 mx-auto mb-2" />
+                                        <div className="text-4xl font-bold text-blue-600">{metrics.questionLeads}</div>
+                                        <div className="text-sm text-muted-foreground mt-1">Question</div>
                                     </CardContent>
                                 </Card>
                             </div>
