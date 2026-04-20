@@ -246,31 +246,37 @@ Amir`
 // STATUS OPTIONS
 // ========================================
 
+export interface StatusStyle {
+    backgroundColor: string;
+    color: string;
+    borderColor: string;
+}
+
 export const INSTAGRAM_STATUS_OPTIONS = [
-    { value: 'new', label: 'New', color: 'bg-blue-100 text-blue-800 border-blue-200' },
-    { value: 'contacted', label: 'Contacted', color: 'bg-yellow-100 text-yellow-800 border-yellow-200' },
-    { value: 'replied', label: 'Replied', color: 'bg-green-100 text-green-800 border-green-200' },
-    { value: 'interested', label: 'Interested', color: 'bg-emerald-100 text-emerald-800 border-emerald-200' },
-    { value: 'not_interested', label: 'Not Interested', color: 'bg-gray-100 text-gray-800 border-gray-200' },
-    { value: 'closed', label: 'Closed', color: 'bg-zinc-100 text-zinc-600 border-zinc-200' },
+    { value: 'new', label: 'New', style: { backgroundColor: '#dbeafe', color: '#1e40af', borderColor: '#bfdbfe' } },
+    { value: 'contacted', label: 'Contacted', style: { backgroundColor: '#fef9c3', color: '#854d0e', borderColor: '#fef08a' } },
+    { value: 'replied', label: 'Replied', style: { backgroundColor: '#dcfce7', color: '#166534', borderColor: '#bbf7d0' } },
+    { value: 'interested', label: 'Interested', style: { backgroundColor: '#d1fae5', color: '#065f46', borderColor: '#a7f3d0' } },
+    { value: 'not_interested', label: 'Not Interested', style: { backgroundColor: '#f3f4f6', color: '#1f2937', borderColor: '#e5e7eb' } },
+    { value: 'closed', label: 'Closed', style: { backgroundColor: '#f4f4f5', color: '#52525b', borderColor: '#e4e4e7' } },
 ];
 
 export const EMAIL_STATUS_OPTIONS = [
-    { value: 'new', label: 'New', color: 'bg-blue-100 text-blue-800 border-blue-200' },
-    { value: 'contacted', label: 'Contacted', color: 'bg-yellow-100 text-yellow-800 border-yellow-200' },
-    { value: 'follow_up_1', label: 'Follow-up 1', color: 'bg-orange-100 text-orange-800 border-orange-200' },
-    { value: 'follow_up_2', label: 'Follow-up 2', color: 'bg-amber-100 text-amber-800 border-amber-200' },
-    { value: 'break_up', label: 'Break-up Sent', color: 'bg-red-100 text-red-800 border-red-200' },
-    { value: 'replied', label: 'Replied', color: 'bg-green-100 text-green-800 border-green-200' },
-    { value: 'interested', label: 'Interested', color: 'bg-emerald-100 text-emerald-800 border-emerald-200' },
-    { value: 'not_interested', label: 'Not Interested', color: 'bg-gray-100 text-gray-800 border-gray-200' },
-    { value: 'closed', label: 'Closed', color: 'bg-zinc-100 text-zinc-600 border-zinc-200' },
+    { value: 'new', label: 'New', style: { backgroundColor: '#dbeafe', color: '#1e40af', borderColor: '#bfdbfe' } },
+    { value: 'contacted', label: 'Contacted', style: { backgroundColor: '#fef9c3', color: '#854d0e', borderColor: '#fef08a' } },
+    { value: 'follow_up_1', label: 'Follow-up 1', style: { backgroundColor: '#ffedd5', color: '#9a3412', borderColor: '#fed7aa' } },
+    { value: 'follow_up_2', label: 'Follow-up 2', style: { backgroundColor: '#fef3c7', color: '#92400e', borderColor: '#fde68a' } },
+    { value: 'break_up', label: 'Break-up Sent', style: { backgroundColor: '#fee2e2', color: '#991b1b', borderColor: '#fecaca' } },
+    { value: 'replied', label: 'Replied', style: { backgroundColor: '#dcfce7', color: '#166534', borderColor: '#bbf7d0' } },
+    { value: 'interested', label: 'Interested', style: { backgroundColor: '#d1fae5', color: '#065f46', borderColor: '#a7f3d0' } },
+    { value: 'not_interested', label: 'Not Interested', style: { backgroundColor: '#f3f4f6', color: '#1f2937', borderColor: '#e5e7eb' } },
+    { value: 'closed', label: 'Closed', style: { backgroundColor: '#f4f4f5', color: '#52525b', borderColor: '#e4e4e7' } },
 ];
 
-export function getStatusStyle(status: string | null, isInstagram: boolean = false): string {
+export function getStatusStyle(status: string | null, isInstagram: boolean = false): StatusStyle {
     const options = isInstagram ? INSTAGRAM_STATUS_OPTIONS : EMAIL_STATUS_OPTIONS;
     const found = options.find(o => o.value === status);
-    return found?.color || 'bg-blue-100 text-blue-800 border-blue-200';
+    return found?.style || { backgroundColor: '#dbeafe', color: '#1e40af', borderColor: '#bfdbfe' };
 }
 
 export function getStatusLabel(status: string | null, isInstagram: boolean = false): string {

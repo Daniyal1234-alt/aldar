@@ -558,7 +558,7 @@ export default function AutomatedOutreachPage() {
                                                                 </Badge>
                                                             </TableCell>
                                                             <TableCell>
-                                                                <span className={`inline-flex items-center px-2.5 py-0.5 text-xs font-medium rounded border ${getStatusStyle(lead.outreach_status)}`}>
+                                                                <span className="inline-flex items-center px-2.5 py-0.5 text-xs font-medium rounded border" style={getStatusStyle(lead.outreach_status)}>
                                                                     {getStatusLabel(lead.outreach_status)}
                                                                 </span>
                                                             </TableCell>
@@ -722,14 +722,14 @@ export default function AutomatedOutreachPage() {
                                                 {EMAIL_STATUS_OPTIONS.map((opt) => (
                                                     <SelectItem key={opt.value} value={opt.value}>
                                                         <span className="flex items-center gap-2">
-                                                            <span className={`h-2 w-2 rounded-full ${opt.color.split(' ')[0]}`} />
+                                                            <span className="h-2 w-2 rounded-full" style={{ backgroundColor: opt.style.color }} />
                                                             {opt.label}
                                                         </span>
                                                     </SelectItem>
                                                 ))}
                                             </SelectContent>
                                         </Select>
-                                        <span className={`inline-flex items-center px-2.5 py-0.5 text-xs font-medium rounded border ${getStatusStyle(selectedLead.outreach_status)}`}>
+                                        <span className="inline-flex items-center px-2.5 py-0.5 text-xs font-medium rounded border" style={getStatusStyle(selectedLead.outreach_status)}>
                                             {getStatusLabel(selectedLead.outreach_status)}
                                         </span>
                                         {selectedLead.attempts > 1 && (

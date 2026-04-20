@@ -3,7 +3,6 @@
 import { Sidebar } from "@/components/layout/Sidebar";
 import { Header } from "@/components/layout/Header";
 import { SearchConfig } from "@/components/dashboard/SearchConfig";
-import { LeadSourceChart } from "@/components/dashboard/LeadSourceChart";
 import { LeadsTable } from "@/components/dashboard/LeadsTable";
 
 export default function LeadSearchPage() {
@@ -22,11 +21,6 @@ export default function LeadSearchPage() {
                     {/* Top Section: Search Configuration */}
                     <section className="animate-in fade-in slide-in-from-bottom-4 duration-500">
                         <SearchConfig />
-                    </section>
-
-                    {/* Middle Section: Chart */}
-                    <section className="animate-in fade-in slide-in-from-bottom-4 duration-500 delay-100">
-                        <LeadSourceChart />
                     </section>
 
                     {/* Bottom Section: Leads Results Table */}

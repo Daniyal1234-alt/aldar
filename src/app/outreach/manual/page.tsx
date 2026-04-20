@@ -368,7 +368,7 @@ export default function ManualOutreachPage() {
                                                                 </Badge>
                                                             </TableCell>
                                                             <TableCell>
-                                                                <span className={`inline-flex items-center px-2.5 py-0.5 text-xs font-medium rounded border ${getStatusStyle(lead.status, true)}`}>
+                                                                <span className="inline-flex items-center px-2.5 py-0.5 text-xs font-medium rounded border" style={getStatusStyle(lead.status, true)}>
                                                                     {getStatusLabel(lead.status, true)}
                                                                 </span>
                                                             </TableCell>
@@ -482,15 +482,15 @@ export default function ManualOutreachPage() {
                                             <SelectContent>
                                                 {INSTAGRAM_STATUS_OPTIONS.map((opt) => (
                                                     <SelectItem key={opt.value} value={opt.value}>
-                                                        <span className={`inline-flex items-center gap-2`}>
-                                                            <span className={`h-2 w-2 rounded-full ${opt.color.split(' ')[0]}`} />
+                                                        <span className="inline-flex items-center gap-2">
+                                                            <span className="h-2 w-2 rounded-full" style={{ backgroundColor: opt.style.color }} />
                                                             {opt.label}
                                                         </span>
                                                     </SelectItem>
                                                 ))}
                                             </SelectContent>
                                         </Select>
-                                        <span className={`inline-flex items-center px-2.5 py-0.5 text-xs font-medium rounded border ${getStatusStyle(selectedLead.status, true)}`}>
+                                        <span className="inline-flex items-center px-2.5 py-0.5 text-xs font-medium rounded border" style={getStatusStyle(selectedLead.status, true)}>
                                             {getStatusLabel(selectedLead.status, true)}
                                         </span>
                                     </div>
