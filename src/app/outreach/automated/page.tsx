@@ -106,10 +106,33 @@ export default function AutomatedOutreachPage() {
     const [dialogOpen, setDialogOpen] = useState(false);
     const [copiedMessage, setCopiedMessage] = useState<string | null>(null);
     const [updatingStatus, setUpdatingStatus] = useState(false);
-    const [searchQuery, setSearchQuery] = useState("");
+    const [searchQuery, setSearchQuery] = useState<string>("");
     const [statusFilter, setStatusFilter] = useState<string>("all");
     const [sourceFilter, setSourceFilter] = useState<string>("all");
     const [activeEmailTab, setActiveEmailTab] = useState<string>("initial");
+
+    // Derived: distinct outreach_status values actually present in the data
+    const availableStatuses = useMemo(() => {
+        const seen = new Set<string>();
+        leads.forEach((l) => {
+            const s = l.outreach_status || 'new';
+            seen.add(s);
+        });
+        // Return them in the preferred display order from EMAIL_STATUS_OPTIONS,
+        // then append any unknown statuses found in the DB that aren't in the list
+        const ordered = EMAIL_STATUS_OPTIONS.filter((o) => seen.has(o.value));
+        const known = new Set(EMAIL_STATUS_OPTIONS.map((o) => o.value));
+        seen.forEach((s) => {
+            if (!known.has(s)) {
+                ordered.push({
+                    value: s,
+                    label: s.replace(/_/g, ' ').replace(/\b\w/g, (c) => c.toUpperCase()),
+                    style: { backgroundColor: '#f3f4f6', color: '#374151', borderColor: '#e5e7eb' },
+                });
+            }
+        });
+        return ordered;
+    }, [leads]);
 
     useEffect(() => {
         fetchLeads();
@@ -459,9 +482,12 @@ export default function AutomatedOutreachPage() {
                                         </SelectTrigger>
                                         <SelectContent>
                                             <SelectItem value="all">All Statuses</SelectItem>
-                                            {EMAIL_STATUS_OPTIONS.map((opt) => (
+                                            {availableStatuses.map((opt) => (
                                                 <SelectItem key={opt.value} value={opt.value}>
-                                                    {opt.label}
+                                                    <span className="flex items-center gap-2">
+                                                        <span className="h-2 w-2 rounded-full" style={{ backgroundColor: opt.style.color }} />
+                                                        {opt.label}
+                                                    </span>
                                                 </SelectItem>
                                             ))}
                                         </SelectContent>
