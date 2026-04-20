@@ -267,6 +267,7 @@ export const EMAIL_STATUS_OPTIONS = [
     { value: 'follow_up_1', label: 'Follow-up 1', style: { backgroundColor: '#ffedd5', color: '#9a3412', borderColor: '#fed7aa' } },
     { value: 'follow_up_2', label: 'Follow-up 2', style: { backgroundColor: '#fef3c7', color: '#92400e', borderColor: '#fde68a' } },
     { value: 'break_up', label: 'Break-up Sent', style: { backgroundColor: '#fee2e2', color: '#991b1b', borderColor: '#fecaca' } },
+    { value: 'bounced', label: 'Bounced', style: { backgroundColor: '#ede9fe', color: '#5b21b6', borderColor: '#ddd6fe' } },
     { value: 'replied', label: 'Replied', style: { backgroundColor: '#dcfce7', color: '#166534', borderColor: '#bbf7d0' } },
     { value: 'interested', label: 'Interested', style: { backgroundColor: '#d1fae5', color: '#065f46', borderColor: '#a7f3d0' } },
     { value: 'not_interested', label: 'Not Interested', style: { backgroundColor: '#f3f4f6', color: '#1f2937', borderColor: '#e5e7eb' } },
